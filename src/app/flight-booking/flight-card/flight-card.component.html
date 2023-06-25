@@ -1,0 +1,21 @@
+<!--<div class="card" [ngStyle]="{'background-color': (isSelected) ? 'rgb(204, 197, 185)' : 'white' }">-->
+<div class="card" [style.background-color]="(isSelected) ? 'rgb(204, 197, 185)' : 'white'">
+
+  <div class="header">
+    <h2 class="title">{{item.from}} - {{item.to}}</h2>
+  </div>
+  <div class="content">
+    <p>Flight-No.: #{{item.id}}<span *ngIf="item.delayed"> (delayed)</span></p>
+    <p [class.delayed]="item.delayed">Date: {{ getDate(item) }}</p>
+    <p>
+      <button *ngIf="!isSelected" class="btn btn-default" (click)="select()">Add</button>
+      <button *ngIf="isSelected" class="btn btn-default" (click)="deselect()">Rem.</button>
+
+      <a class="btn btn-default" style="margin-left: 10px" (click)="edit.emit()">Edit</a>
+
+      <ng-content></ng-content>
+    </p>
+  </div>
+</div>
+
+<!--{{ blink() }}-->
