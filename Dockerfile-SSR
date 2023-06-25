@@ -1,0 +1,26 @@
+# Stage 0, Node, download deps & build the app
+FROM node:16-alpine as builder
+
+# set working directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# add app
+COPY . /usr/src/app
+
+# install deps and cli
+RUN npm install
+RUN npm install -g @angular/cli
+
+# add .bin to $PATH
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+
+# build app & server
+RUN ng build
+RUN ng run performance:server
+
+# build default port
+EXPOSE 4000
+
+# start server
+CMD ["node", "/usr/src/app/dist/performance/server/main.js"]

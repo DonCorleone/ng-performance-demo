@@ -18,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/performance",
+            "outputPath": "dist/performance/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -60,7 +60,7 @@
                 }
               ],
               "verbose": false,
-              "outputHashing": "bundles",
+              "outputHashing": "none",
               "vendorChunk": true,
               "sourceMap": true,
               "statsJson": true,
@@ -167,6 +167,70 @@
               "devServerTarget": "essentials:serve:development"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/performance/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "none",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": true,
+              "vendorChunk": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "outputHashing": "none",
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "performance:build:development",
+              "serverTarget": "performance:server:development"
+            },
+            "production": {
+              "browserTarget": "performance:build:production",
+              "serverTarget": "performance:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "performance:build:production",
+              "serverTarget": "performance:server:production"
+            },
+            "development": {
+              "browserTarget": "performance:build:development",
+              "serverTarget": "performance:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -17,12 +17,14 @@ import { APP_ROUTES } from './app.routes';
     BrowserModule,
     HttpClientModule,
     FlightBookingModule,
-    RouterModule.forRoot(
-      APP_ROUTES
-      // { useHash: true, enableTracing: true }
-    )
+    RouterModule.forRoot(APP_ROUTES, {
+      // useHash: true,
+      // enableTracing: true,
+      initialNavigation: 'enabledBlocking'
+    })
   ],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent],
+  providers: [provideClientHydration()],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

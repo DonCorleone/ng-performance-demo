@@ -7,8 +7,8 @@ import { Flight } from '../../../entities/flight';
 
 @Injectable({ providedIn: 'root' })
 export class FlightService {
-  url = 'http://www.angular.at/api/flight';
-  // url = 'https://demo.angulararchitects.io/api/Flight';
+  // url = 'http://www.angular.at/api/flight';
+  url = 'https://demo.angulararchitects.io/api/Flight';
 
   constructor(private http: HttpClient) {}
 
