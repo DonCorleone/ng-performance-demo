@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgOptimizedImage, provideImageKitLoader } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 
@@ -25,7 +25,7 @@ import { APP_ROUTES } from './app.routes';
     }),
     NgOptimizedImage
   ],
-  providers: [provideImageKitLoader('https://ik.imagekit.io/LXT')],
+  providers: [provideImageKitLoader('https://ik.imagekit.io/LXT'), provideClientHydration()],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent],
   bootstrap: [AppComponent]
 })
