@@ -1,9 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { NgOptimizedImage, provideImageKitLoader } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 
-import { FlightBookingModule } from './flight-booking/flight-booking.module';
+// import { FlightBookingModule } from './flight-booking/flight-booking.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -16,15 +17,16 @@ import { APP_ROUTES } from './app.routes';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FlightBookingModule,
+    // FlightBookingModule,
     RouterModule.forRoot(APP_ROUTES, {
       // useHash: true,
       // enableTracing: true,
-      initialNavigation: 'enabledBlocking'
-    })
+      preloadingStrategy: PreloadAllModules
+    }),
+    NgOptimizedImage
   ],
+  providers: [provideImageKitLoader('https://ik.imagekit.io/LXT')],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent],
-  providers: [provideClientHydration()],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

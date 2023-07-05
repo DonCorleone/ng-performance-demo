@@ -10,8 +10,8 @@ import { FlightCardComponent } from './flight-card/flight-card.component';
 import { FlightStatusToggleComponent } from './flight-status-toggle/flight-status-toggle.component';
 import { FlightValidationErrorsComponent } from './flight-validation-errors/flight-validation-errors.component';
 import { FlightEditComponent } from './flight-edit/flight-edit.component';
-import { ChartsComponent } from './charts/charts.component';
-import { ChartComponent } from './chart/chart.component';
+// import { ChartsComponent } from './charts/charts.component';
+// import { ChartComponent } from './chart/chart.component';
 
 import { CityValidatorDirective } from './shared/validation/city-validator.directive';
 import { AsyncCityValidatorDirective } from './shared/validation/async-city-validator.directive';
@@ -28,14 +28,14 @@ import { FLIGHT_BOOKING_ROUTES } from './flight-booking.routes';
     FlightStatusToggleComponent,
     FlightValidationErrorsComponent,
     FlightEditComponent,
-    ChartsComponent,
-    ChartComponent,
+    // ChartsComponent,
+    // ChartComponent,
     CityValidatorDirective,
     AsyncCityValidatorDirective,
     MultiFieldValidatorDirective,
     AsyncMultiFieldValidatorDirective
   ],
   providers: [],
-  exports: [FlightSearchComponent]
+  exports: []
 })
 export class FlightBookingModule {}
