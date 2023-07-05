@@ -14,9 +14,11 @@ RUN npm install -g @angular/cli
 
 # add .bin to $PATH
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
+ENV NODE_OPTIONS=--max-old-space-size=4200
 
 # build app & server
 RUN ng build
+RUN ng run performance:prerender
 RUN ng run performance:server
 
 # build default port
