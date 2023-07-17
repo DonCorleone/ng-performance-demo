@@ -34,7 +34,7 @@ If you want, you can even run the Google PageSpeed Insights tests used to measur
 
 I use the Flight App as the demonstration example. It is a small and simple Angular app. To get realistic results and timings we've added some links to big CSS files (by Bootstrap) and a big Chart library (by AnyChart) - the latter being lazy-loaded at least.
 
-So please don't expect world breaking records here - we just want to demonstrate the improvements by adding SSR, Prerendering & Client Hydration.
+Besides, all of that is running on a very cheap virtual server, actually the cheapest virtual root server offering by [netcup.de](https://www.netcup.de/vserver/). So please don't expect world breaking records here - we just want to demonstrate the improvements by adding SSR, Prerendering & Client Hydration.
 
 ## The base case using Client Side Rendering
 
@@ -101,7 +101,12 @@ Since we want to serve our Flight App via `https`, we also need to use the secur
 
 Now let's run our first test on Google PageSpeed Insights:
 
+<p align="center">
 ![Client Side Rendering](images/step-0-base-case-csr.png)
+
+Illustration: Client Side Rendering
+
+</p>
 
 The base case takes 2.2s to show the FCP and 3.8s for the LCP. There is no CLS.
 
@@ -115,7 +120,12 @@ ng add @nguniversal/express-engine
 
 This will add the dependencies and all the configuration files needed to run Angular in SSR mode:
 
+<p align="center">
 ![Angular Universal Configuration](images/ng-universal-config.png)
+
+Illustration: Angular Universal Configuration
+
+</p>
 
 Now we want to use a `Node.js` container to serve our Angular app.
 
@@ -182,7 +192,12 @@ Secondly we need to update the `server.ts`:
 
 So, now let's check the results with SSR:
 
+<p align="center">
 ![Server Side Rendering](images/step-1-ssr.png)
+
+Illustration: Server Side Rendering
+
+</p>
 
 The server side rendered variant takes 2.0s (-0.2s) to show the FCP and 2.2s (-1.6s) for the LCP. There is a CLS of 0.165 because the page has to be rerendered in the client. It's already much faster than CSR, but you get a CLS which is not good. We can do better than that!
 
@@ -217,7 +232,12 @@ RUN ng run performance:prerender --routes-file routes.txt
 
 Let's check the results with prerendering:
 
+<p align="center">
 ![Prerendering of routes](images/step-2-prerender.png)
+
+Illustration: Prerendering of routes
+
+</p>
 
 The prerendered SSR variant takes 1.7s (-0.5s) to show the FCP and 2.4s (-1.4s) for the LCP. There is still a CLS of 0.165 because of the rerendering in the client. It's merely faster than the SSR without prerendering. This is because the Angular app is very simple and thus rendering on the server does not take very long.
 
@@ -250,7 +270,12 @@ export const appConfig: ApplicationConfig = {
 
 Let's check the final results:
 
+<p align="center">
 ![Non-Destructive Hydration](images/step-3-hydration.png)
+
+Illustration: Non-Destructive Hydration
+
+</p>
 
 The SSR with Client Hydration variant takes 1.5s (-0.7s) to show the FCP and 1.5s (-2.3s) for the LCP. There is no CLS. It's blazingly fast and we get rid of the CLS, because the DOM does not have to be rerendered.
 
